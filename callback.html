@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Authorization - StoryForge Shorts</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 20px; background: #1a1a2e; color: #eee; text-align: center; }
+        h1 { color: #FF6B35; }
+        .code-box { background: #2D1B69; padding: 20px; border-radius: 10px; margin: 20px 0; font-family: monospace; font-size: 1.2em; word-break: break-all; user-select: all; cursor: pointer; }
+        .error { color: #ff4444; }
+        .success { color: #44ff44; }
+        button { background: #FF6B35; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1em; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #e55a2b; }
+    </style>
+</head>
+<body>
+    <h1>StoryForge Shorts</h1>
+    <div id="result"></div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const error = params.get('error');
+        const el = document.getElementById('result');
+
+        if (code) {
+            el.innerHTML = `
+                <p class="success">Authorization successful!</p>
+                <p>Copy this code and paste it back in your terminal:</p>
+                <div class="code-box" id="code" onclick="copyCode()">${code}</div>
+                <button onclick="copyCode()">Copy Code</button>
+                <p id="copied" style="display:none; color: #44ff44;">Copied!</p>
+            `;
+        } else if (error) {
+            el.innerHTML = `<p class="error">Authorization failed: ${error}</p><p>${params.get('error_description') || ''}</p>`;
+        } else {
+            el.innerHTML = `<p class="error">No authorization code received.</p>`;
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(document.getElementById('code').textContent);
+            document.getElementById('copied').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
