@@ -40,6 +40,16 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+/* Noise grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('../noise.png') repeat;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 9999;
+}
 a { color: var(--brand); text-decoration: none; transition: color 0.3s; }
 a:hover { color: var(--brand-hover); }
 img { max-width: 100%; display: block; }
@@ -153,6 +163,20 @@ button { font-family: var(--font); cursor: pointer; }
   background: radial-gradient(ellipse at 50% 0%, rgba(45, 27, 105, 0.35) 0%, transparent 70%),
               var(--bg);
 }
+/* Hero uses CSS-only fade-in so it's visible immediately (no blank flash) */
+.hero .hero-content {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+.hero .hero-video {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+@keyframes heroFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
 .hero-content { max-width: 800px; }
 .hero-label {
   display: inline-block;
@@ -194,7 +218,7 @@ button { font-family: var(--font); cursor: pointer; }
   box-shadow: 0 20px 60px rgba(255, 107, 53, 0.15);
 }
 
-/* Scroll indicator */
+/* Scroll indicator — fades out on scroll */
 .scroll-hint {
   position: absolute;
   bottom: 2.5rem;
@@ -208,6 +232,11 @@ button { font-family: var(--font); cursor: pointer; }
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  transition: opacity 0.5s;
+}
+.scroll-hint.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 .scroll-hint .arrow {
   width: 1px;
@@ -491,12 +520,21 @@ button { font-family: var(--font); cursor: pointer; }
   padding-bottom: var(--section-pad);
 }
 
+/* Sort / Filter bar */
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
 /* Filter Tabs */
 .filter-tabs {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 .filter-tab {
   padding: 0.5rem 1.15rem;
@@ -531,7 +569,33 @@ button { font-family: var(--font); cursor: pointer; }
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Gallery grid */
+/* Sort toggle */
+.sort-toggle {
+  display: flex;
+  gap: 0.35rem;
+}
+.sort-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--small);
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.sort-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.sort-btn.active {
+  background: var(--purple);
+  border-color: var(--purple-light);
+  color: #fff;
+}
+
+/* Gallery grid — smooth filter transitions */
 .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -541,7 +605,20 @@ button { font-family: var(--font); cursor: pointer; }
 .video-grid .story-card {
   width: 100%;
   max-width: 340px;
+  animation: cardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Stagger card animations */
+.video-grid .story-card:nth-child(1) { animation-delay: 0s; }
+.video-grid .story-card:nth-child(2) { animation-delay: 0.04s; }
+.video-grid .story-card:nth-child(3) { animation-delay: 0.08s; }
+.video-grid .story-card:nth-child(4) { animation-delay: 0.12s; }
+.video-grid .story-card:nth-child(5) { animation-delay: 0.16s; }
+.video-grid .story-card:nth-child(6) { animation-delay: 0.2s; }
+.video-grid .story-card:nth-child(n+7) { animation-delay: 0.24s; }
 
 /* ============================================
    CTA / Social Section
@@ -688,6 +765,52 @@ button { font-family: var(--font); cursor: pointer; }
 .legal-content strong { color: var(--text); }
 
 /* ============================================
+   404 Page
+   ============================================ */
+.page-404 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.page-404 .code {
+  font-size: clamp(5rem, 15vw, 10rem);
+  font-weight: 800;
+  color: var(--purple);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.page-404 h1 {
+  font-size: var(--h2);
+  color: #fff;
+  font-weight: 700;
+  margin: 1rem 0 0.75rem;
+}
+.page-404 p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+.page-404 .btn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: var(--small);
+  transition: background 0.3s, transform 0.3s;
+}
+.page-404 .btn:hover {
+  background: var(--brand-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ============================================
    Loading / Empty States
    ============================================ */
 .loading-msg {
@@ -705,6 +828,7 @@ button { font-family: var(--font); cursor: pointer; }
   .latest-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .latest-grid .story-card { max-width: 340px; justify-self: center; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .gallery-controls { justify-content: center; }
 }
 
 @media (max-width: 768px) {

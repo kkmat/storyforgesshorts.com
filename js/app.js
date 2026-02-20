@@ -9,6 +9,8 @@
     : "";
 
   let allStories = [];
+  let currentFilter = "All";
+  let currentSort = "newest";
 
   /* --- Utilities --- */
 
@@ -31,9 +33,8 @@
   /* --- Scroll Reveal --- */
 
   function initReveal() {
-    const els = document.querySelectorAll(".reveal");
+    const els = document.querySelectorAll(".reveal:not(.revealed)");
     if (!els.length) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -48,24 +49,29 @@
     els.forEach((el) => observer.observe(el));
   }
 
-  /* --- Nav scroll --- */
+  /* --- Nav scroll + scroll hint hide --- */
 
   function initNav() {
     const nav = document.querySelector(".site-nav");
     const toggle = document.querySelector(".nav-toggle");
     const links = document.querySelector(".nav-links");
-    if (!nav) return;
+    const scrollHint = document.querySelector(".scroll-hint");
 
-    window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 60);
-    });
+    if (nav) {
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 60);
+        // Hide scroll indicator once user scrolls
+        if (scrollHint) {
+          scrollHint.classList.toggle("hidden", window.scrollY > 100);
+        }
+      });
+    }
 
     if (toggle && links) {
       toggle.addEventListener("click", () => {
         toggle.classList.toggle("open");
         links.classList.toggle("open");
       });
-      // Close menu when clicking a link
       links.querySelectorAll("a").forEach((a) => {
         a.addEventListener("click", () => {
           toggle.classList.remove("open");
@@ -145,11 +151,28 @@
     return Array.from(map.values());
   }
 
+  /* --- Sorting --- */
+
+  function sortStories(stories, mode) {
+    const copy = [...stories];
+    if (mode === "popular") {
+      copy.sort((a, b) => b.views - a.views);
+    }
+    // "newest" is already the default order from the JSON
+    return copy;
+  }
+
+  function getFilteredSorted() {
+    let list = currentFilter === "All"
+      ? allStories
+      : allStories.filter((s) => s.subreddit === currentFilter);
+    return sortStories(list, currentSort);
+  }
+
   /* --- Init --- */
 
   async function init() {
     initNav();
-    initReveal();
     initBackToTop();
 
     try {
@@ -167,15 +190,15 @@
       renderStats(stats);
       renderLatest(allStories.slice(0, 3));
       renderFilters(stats.subreddits);
-      renderGallery(allStories);
+      renderSortToggle();
+      renderGallery(getFilteredSorted());
       initCounters();
-
-      // Re-run reveal for dynamically added elements
       initReveal();
     } catch (err) {
       console.error("Data load failed:", err);
       const el = document.getElementById("video-grid");
       if (el) el.innerHTML = '<p class="loading-msg">Visit our YouTube channel for the latest videos.</p>';
+      initReveal();
     }
   }
 
@@ -194,12 +217,20 @@
   function renderStats(stats) {
     const el = document.getElementById("stats-row");
     if (!el) return;
+
+    // Show stories + videos, views, subreddits
+    // If likes > 0 show likes, otherwise show stories count
     const items = [
+      { n: stats.total_stories || 0, l: "Stories" },
       { n: stats.total_videos, l: "Videos" },
       { n: stats.total_views, l: "Views" },
-      { n: stats.total_likes, l: "Likes" },
-      { n: stats.total_subreddits, l: "Subreddits" },
     ];
+    if (stats.total_likes > 0) {
+      items.push({ n: stats.total_likes, l: "Likes" });
+    } else {
+      items.push({ n: stats.total_subreddits, l: "Subreddits" });
+    }
+
     el.innerHTML = items
       .map(
         (i) => `<div class="stat-item">
@@ -215,7 +246,7 @@
   function renderLatest(stories) {
     const el = document.getElementById("latest-grid");
     if (!el) return;
-    el.innerHTML = stories.map((s, i) => storyCardHTML(s, `reveal-delay-${i + 1}`)).join("");
+    el.innerHTML = stories.map((s, i) => storyCardHTML(s, `reveal reveal-delay-${i + 1}`)).join("");
     attachCardHandlers(el);
   }
 
@@ -245,8 +276,28 @@
       if (!btn) return;
       el.querySelectorAll(".filter-tab").forEach((t) => t.classList.remove("active"));
       btn.classList.add("active");
-      const f = btn.dataset.filter;
-      renderGallery(f === "All" ? allStories : allStories.filter((s) => s.subreddit === f));
+      currentFilter = btn.dataset.filter;
+      renderGallery(getFilteredSorted());
+    });
+  }
+
+  /* --- Sort toggle --- */
+
+  function renderSortToggle() {
+    const el = document.getElementById("sort-toggle");
+    if (!el) return;
+
+    el.innerHTML = `
+      <button class="sort-btn active" data-sort="newest">Newest</button>
+      <button class="sort-btn" data-sort="popular">Most Viewed</button>`;
+
+    el.addEventListener("click", (e) => {
+      const btn = e.target.closest(".sort-btn");
+      if (!btn) return;
+      el.querySelectorAll(".sort-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentSort = btn.dataset.sort;
+      renderGallery(getFilteredSorted());
     });
   }
 
@@ -279,7 +330,7 @@
         ).join("") + "</div>";
     }
 
-    const cls = extraClass ? ` reveal ${extraClass}` : "";
+    const cls = extraClass ? ` ${extraClass}` : "";
 
     return `<div class="story-card${cls}">
       ${tabs}
@@ -301,7 +352,6 @@
   /* --- Card interaction handlers --- */
 
   function attachCardHandlers(root) {
-    // Click-to-play thumbnails
     root.querySelectorAll(".thumb-wrap").forEach((wrap) => {
       wrap.addEventListener("click", function () {
         const id = this.dataset.vid;
@@ -314,7 +364,6 @@
       });
     });
 
-    // Part tab switching
     root.querySelectorAll(".part-tabs").forEach((row) => {
       row.addEventListener("click", (e) => {
         const btn = e.target.closest(".part-tab");
@@ -327,7 +376,6 @@
         row.querySelectorAll(".part-tab").forEach((t) => t.classList.remove("active"));
         btn.classList.add("active");
 
-        // Swap to new thumbnail
         const area = card.querySelector(".thumb-wrap, .iframe-wrap");
         if (area) {
           const thumb = document.createElement("div");
@@ -345,7 +393,6 @@
           area.replaceWith(thumb);
         }
 
-        // Update meta
         const metaSpans = card.querySelectorAll(".meta span");
         if (metaSpans.length > 1) {
           metaSpans[1].textContent = views > 0 ? fmt(views) + " views" : "";

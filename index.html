@@ -10,6 +10,8 @@
     <meta property="og:image" content="/storyforgesshorts.com/app_icon.png">
     <meta property="og:type" content="website">
     <link rel="icon" href="/storyforgesshorts.com/app_icon.png">
+    <link rel="preconnect" href="https://img.youtube.com">
+    <link rel="preconnect" href="https://www.youtube.com">
     <link rel="stylesheet" href="/storyforgesshorts.com/css/style.css">
 </head>
 <body>
@@ -30,14 +32,14 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero — CSS-only fade-in, no .reveal needed -->
     <section class="hero">
-        <div class="hero-content reveal">
+        <div class="hero-content">
             <span class="hero-label">Daily Reddit Stories</span>
             <h1>Stories that<br><span class="accent">stick with you.</span></h1>
             <p class="hero-sub">Compelling Reddit stories — AITA, Confessions, TIFU and more — brought to life as cinematic short-form videos.</p>
         </div>
-        <div id="hero-video" class="hero-video reveal reveal-delay-2"></div>
+        <div id="hero-video" class="hero-video"></div>
         <div class="scroll-hint">
             <span>Scroll</span>
             <div class="arrow"></div>
@@ -101,7 +103,10 @@
                 <span class="label">Archive</span>
                 <h2>Browse all stories</h2>
             </div>
-            <div id="filter-tabs" class="filter-tabs reveal"></div>
+            <div class="gallery-controls reveal">
+                <div id="filter-tabs" class="filter-tabs"></div>
+                <div id="sort-toggle" class="sort-toggle"></div>
+            </div>
             <div id="video-grid" class="video-grid">
                 <p class="loading-msg">Loading...</p>
             </div>
