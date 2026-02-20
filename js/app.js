@@ -1,140 +1,117 @@
-/* StoryForge Shorts — Dynamic content loader */
+/* ============================================
+   StoryForge Shorts — App
+   ============================================ */
 (function () {
   "use strict";
 
-  const BASE = getBasePath();
+  const BASE = location.pathname.includes("/storyforgesshorts.com")
+    ? "/storyforgesshorts.com"
+    : "";
+
   let allStories = [];
 
-  function getBasePath() {
-    const path = location.pathname;
-    if (path.includes("/storyforgesshorts.com")) {
-      return "/storyforgesshorts.com";
-    }
-    return "";
-  }
+  /* --- Utilities --- */
 
-  // --- Helpers ---
-
-  function escapeHtml(str) {
+  function esc(str) {
     const el = document.createElement("span");
     el.textContent = str;
     return el.innerHTML;
   }
 
-  function escapeAttr(str) {
+  function escAttr(str) {
     return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   }
 
-  function formatNumber(n) {
-    if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
-    if (n >= 1000) return (n / 1000).toFixed(1) + "K";
+  function fmt(n) {
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+    if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
     return String(n);
   }
 
-  // --- Group videos into stories ---
+  /* --- Scroll Reveal --- */
 
-  function groupIntoStories(videos) {
-    const map = new Map();
-    for (const v of videos) {
-      const key = v.story_id;
-      if (!map.has(key)) {
-        map.set(key, {
-          story_id: key,
-          subreddit: v.subreddit,
-          date: v.date,
-          parts: [],
-          total_views: 0,
-          total_likes: 0,
-        });
-      }
-      const story = map.get(key);
-      story.parts.push(v);
-      story.total_views += v.views || 0;
-      story.total_likes += v.likes || 0;
-    }
-    // Sort parts within each story
-    for (const story of map.values()) {
-      story.parts.sort((a, b) => (a.part || 1) - (b.part || 1));
-    }
-    return Array.from(map.values());
-  }
+  function initReveal() {
+    const els = document.querySelectorAll(".reveal");
+    if (!els.length) return;
 
-  // --- Init ---
-
-  async function init() {
-    try {
-      const [videosRes, statsRes] = await Promise.all([
-        fetch(`${BASE}/data/videos.json`),
-        fetch(`${BASE}/data/stats.json`),
-      ]);
-
-      if (!videosRes.ok || !statsRes.ok) throw new Error("Failed to load data");
-
-      const allVideos = await videosRes.json();
-      const stats = await statsRes.json();
-
-      allStories = groupIntoStories(allVideos);
-
-      renderHeroVideos(allVideos.slice(0, 3));
-      renderStats(stats);
-      renderFilterTabs(stats.subreddits, allStories);
-      renderGallery(allStories);
-      initBackToTop();
-    } catch (err) {
-      console.error("Failed to load site data:", err);
-      showFallback();
-    }
-  }
-
-  // --- Hero Videos (live embeds for top 3) ---
-
-  function renderHeroVideos(videos) {
-    const container = document.getElementById("hero-videos");
-    if (!container || !videos.length) return;
-
-    container.innerHTML = videos
-      .map(
-        (v) => `
-      <div class="video-card">
-        <iframe src="${v.embed_url}" title="${escapeAttr(v.title)}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-          allowfullscreen loading="lazy"></iframe>
-      </div>`
-      )
-      .join("");
-  }
-
-  // --- Stats with animated counters ---
-
-  function renderStats(stats) {
-    const container = document.getElementById("stats-grid");
-    if (!container) return;
-
-    const cards = [
-      { number: stats.total_videos, label: "Videos" },
-      { number: stats.total_views, label: "Views" },
-      { number: stats.total_likes, label: "Likes" },
-      { number: stats.total_subreddits, label: "Subreddits" },
-    ];
-
-    container.innerHTML = cards
-      .map(
-        (c) => `
-      <div class="stat-card">
-        <div class="number" data-target="${c.number}">0</div>
-        <div class="label">${c.label}</div>
-      </div>`
-      )
-      .join("");
-
-    // Animate counters when they scroll into view
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(entry.target);
-          const nums = entry.target.querySelectorAll(".number[data-target]");
-          nums.forEach(animateCounter);
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("revealed");
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => observer.observe(el));
+  }
+
+  /* --- Nav scroll --- */
+
+  function initNav() {
+    const nav = document.querySelector(".site-nav");
+    const toggle = document.querySelector(".nav-toggle");
+    const links = document.querySelector(".nav-links");
+    if (!nav) return;
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    if (toggle && links) {
+      toggle.addEventListener("click", () => {
+        toggle.classList.toggle("open");
+        links.classList.toggle("open");
+      });
+      // Close menu when clicking a link
+      links.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          toggle.classList.remove("open");
+          links.classList.remove("open");
+        });
+      });
+    }
+  }
+
+  /* --- Back to top --- */
+
+  function initBackToTop() {
+    const btn = document.getElementById("back-to-top");
+    if (!btn) return;
+    window.addEventListener("scroll", () => {
+      btn.classList.toggle("visible", window.scrollY > 500);
+    });
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* --- Animated counters --- */
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    if (!target) { el.textContent = "0"; return; }
+    const duration = 1400;
+    const start = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  function initCounters() {
+    const container = document.getElementById("stats-row");
+    if (!container) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          observer.unobserve(e.target);
+          e.target.querySelectorAll("[data-target]").forEach(animateCounter);
         });
       },
       { threshold: 0.3 }
@@ -142,231 +119,245 @@
     observer.observe(container);
   }
 
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target, 10);
-    if (isNaN(target) || target === 0) {
-      el.textContent = "0";
-      return;
-    }
-    const duration = 1200;
-    const start = performance.now();
+  /* --- Group videos into stories --- */
 
-    function tick(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = formatNumber(Math.round(target * eased));
-      if (progress < 1) requestAnimationFrame(tick);
+  function groupStories(videos) {
+    const map = new Map();
+    for (const v of videos) {
+      if (!map.has(v.story_id)) {
+        map.set(v.story_id, {
+          story_id: v.story_id,
+          subreddit: v.subreddit,
+          date: v.date,
+          parts: [],
+          views: 0,
+          likes: 0,
+        });
+      }
+      const s = map.get(v.story_id);
+      s.parts.push(v);
+      s.views += v.views || 0;
+      s.likes += v.likes || 0;
     }
-    requestAnimationFrame(tick);
+    for (const s of map.values()) {
+      s.parts.sort((a, b) => (a.part || 1) - (b.part || 1));
+    }
+    return Array.from(map.values());
   }
 
-  // --- Filter Tabs with counts ---
+  /* --- Init --- */
 
-  function renderFilterTabs(subreddits, stories) {
-    const container = document.getElementById("filter-tabs");
-    if (!container) return;
+  async function init() {
+    initNav();
+    initReveal();
+    initBackToTop();
 
-    // Count stories per subreddit
-    const counts = {};
-    for (const s of stories) {
-      counts[s.subreddit] = (counts[s.subreddit] || 0) + 1;
+    try {
+      const [vRes, sRes] = await Promise.all([
+        fetch(`${BASE}/data/videos.json`),
+        fetch(`${BASE}/data/stats.json`),
+      ]);
+      if (!vRes.ok || !sRes.ok) throw new Error("fetch failed");
+
+      const videos = await vRes.json();
+      const stats = await sRes.json();
+      allStories = groupStories(videos);
+
+      renderHero(videos[0]);
+      renderStats(stats);
+      renderLatest(allStories.slice(0, 3));
+      renderFilters(stats.subreddits);
+      renderGallery(allStories);
+      initCounters();
+
+      // Re-run reveal for dynamically added elements
+      initReveal();
+    } catch (err) {
+      console.error("Data load failed:", err);
+      const el = document.getElementById("video-grid");
+      if (el) el.innerHTML = '<p class="loading-msg">Visit our YouTube channel for the latest videos.</p>';
     }
+  }
+
+  /* --- Hero featured video --- */
+
+  function renderHero(video) {
+    const el = document.getElementById("hero-video");
+    if (!el || !video) return;
+    el.innerHTML = `<iframe src="${video.embed_url}" title="${escAttr(video.title)}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+      allowfullscreen loading="lazy"></iframe>`;
+  }
+
+  /* --- Stats --- */
+
+  function renderStats(stats) {
+    const el = document.getElementById("stats-row");
+    if (!el) return;
+    const items = [
+      { n: stats.total_videos, l: "Videos" },
+      { n: stats.total_views, l: "Views" },
+      { n: stats.total_likes, l: "Likes" },
+      { n: stats.total_subreddits, l: "Subreddits" },
+    ];
+    el.innerHTML = items
+      .map(
+        (i) => `<div class="stat-item">
+          <div class="stat-number" data-target="${i.n}">0</div>
+          <div class="stat-label">${i.l}</div>
+        </div>`
+      )
+      .join("");
+  }
+
+  /* --- Latest stories (3 featured) --- */
+
+  function renderLatest(stories) {
+    const el = document.getElementById("latest-grid");
+    if (!el) return;
+    el.innerHTML = stories.map((s, i) => storyCardHTML(s, `reveal-delay-${i + 1}`)).join("");
+    attachCardHandlers(el);
+  }
+
+  /* --- Filters --- */
+
+  function renderFilters(subreddits) {
+    const el = document.getElementById("filter-tabs");
+    if (!el) return;
+
+    const counts = {};
+    for (const s of allStories) counts[s.subreddit] = (counts[s.subreddit] || 0) + 1;
 
     const tabs = [
-      { name: "All", count: stories.length },
-      ...subreddits.map((sub) => ({ name: sub, count: counts[sub] || 0 })),
+      { name: "All", count: allStories.length },
+      ...subreddits.map((s) => ({ name: s, count: counts[s] || 0 })),
     ];
 
-    container.innerHTML = tabs
+    el.innerHTML = tabs
       .map(
         (t) =>
-          `<button class="filter-tab${t.name === "All" ? " active" : ""}" data-filter="${t.name}">${escapeHtml(t.name)}<span class="count">${t.count}</span></button>`
+          `<button class="filter-tab${t.name === "All" ? " active" : ""}" data-filter="${t.name}">${esc(t.name)}<span class="count">${t.count}</span></button>`
       )
       .join("");
 
-    container.addEventListener("click", function (e) {
+    el.addEventListener("click", (e) => {
       const btn = e.target.closest(".filter-tab");
       if (!btn) return;
-
-      container
-        .querySelectorAll(".filter-tab")
-        .forEach((t) => t.classList.remove("active"));
+      el.querySelectorAll(".filter-tab").forEach((t) => t.classList.remove("active"));
       btn.classList.add("active");
-
-      const filter = btn.dataset.filter;
-      if (filter === "All") {
-        renderGallery(allStories);
-      } else {
-        renderGallery(allStories.filter((s) => s.subreddit === filter));
-      }
+      const f = btn.dataset.filter;
+      renderGallery(f === "All" ? allStories : allStories.filter((s) => s.subreddit === f));
     });
   }
 
-  // --- Gallery with thumbnail click-to-play and story grouping ---
+  /* --- Gallery --- */
 
   function renderGallery(stories) {
-    const container = document.getElementById("video-grid");
-    if (!container) return;
-
+    const el = document.getElementById("video-grid");
+    if (!el) return;
     if (!stories.length) {
-      container.innerHTML =
-        '<p class="loading">No videos found for this category.</p>';
+      el.innerHTML = '<p class="loading-msg">No stories in this category yet.</p>';
       return;
     }
-
-    container.innerHTML = stories.map(renderStoryCard).join("");
-
-    // Attach click-to-play handlers
-    container.querySelectorAll(".thumb-wrap").forEach((wrap) => {
-      wrap.addEventListener("click", function () {
-        const id = this.dataset.videoId;
-        const iframe = document.createElement("div");
-        iframe.className = "iframe-wrap";
-        iframe.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" title="Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-          allowfullscreen></iframe>`;
-        this.replaceWith(iframe);
-      });
-    });
-
-    // Attach part tab handlers
-    container.querySelectorAll(".part-tabs").forEach((tabRow) => {
-      tabRow.addEventListener("click", function (e) {
-        const btn = e.target.closest(".part-tab");
-        if (!btn) return;
-        const card = btn.closest(".story-card");
-        const videoId = btn.dataset.videoId;
-        const watchUrl = btn.dataset.watchUrl;
-        const views = btn.dataset.views;
-        const partLabel = btn.dataset.partLabel;
-
-        // Update active tab
-        tabRow.querySelectorAll(".part-tab").forEach((t) => t.classList.remove("active"));
-        btn.classList.add("active");
-
-        // Replace video area with new thumbnail
-        const videoArea = card.querySelector(".thumb-wrap, .iframe-wrap");
-        if (videoArea) {
-          const thumb = createThumbnail(videoId);
-          videoArea.replaceWith(thumb);
-          // Re-attach click handler
-          thumb.addEventListener("click", function () {
-            const iframe = document.createElement("div");
-            iframe.className = "iframe-wrap";
-            iframe.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-              allowfullscreen></iframe>`;
-            this.replaceWith(iframe);
-          });
-        }
-
-        // Update views and watch link
-        const viewsEl = card.querySelector(".views");
-        if (viewsEl && views !== undefined) {
-          viewsEl.textContent = parseInt(views, 10) > 0 ? formatNumber(parseInt(views, 10)) + " views" : "";
-        }
-        const ytLink = card.querySelector(".yt-link");
-        if (ytLink) ytLink.href = watchUrl;
-      });
-    });
+    el.innerHTML = stories.map((s) => storyCardHTML(s)).join("");
+    attachCardHandlers(el);
   }
 
-  function createThumbnail(videoId) {
-    const wrap = document.createElement("div");
-    wrap.className = "thumb-wrap";
-    wrap.dataset.videoId = videoId;
-    wrap.innerHTML = `<img src="https://img.youtube.com/vi/${videoId}/0.jpg"
-        alt="Video thumbnail" loading="lazy">
-      <div class="play-btn"></div>`;
-    return wrap;
-  }
+  /* --- Story Card HTML --- */
 
-  function renderStoryCard(story) {
+  function storyCardHTML(story, extraClass) {
     const first = story.parts[0];
-    const isMulti = story.parts.length > 1;
-    const viewsText =
-      first.views > 0 ? `<span class="views">${formatNumber(first.views)} views</span>` : '<span class="views"></span>';
+    const multi = story.parts.length > 1;
+    const title = story.subreddit + " Story";
+    const views = first.views > 0 ? `<span>${fmt(first.views)} views</span>` : "";
 
-    // Story title without part number
-    const storyTitle = story.subreddit + " Story";
-
-    let partTabsHtml = "";
-    if (isMulti) {
-      partTabsHtml =
-        '<div class="part-tabs">' +
-        story.parts
-          .map(
-            (p, i) =>
-              `<button class="part-tab${i === 0 ? " active" : ""}"
-                data-video-id="${p.id}" data-watch-url="${escapeAttr(p.watch_url)}"
-                data-views="${p.views || 0}" data-part-label="${p.part || 1}">Part ${p.part || 1}</button>`
-          )
-          .join("") +
-        "</div>";
+    let tabs = "";
+    if (multi) {
+      tabs = '<div class="part-tabs">' +
+        story.parts.map((p, i) =>
+          `<button class="part-tab${i === 0 ? " active" : ""}" data-vid="${p.id}" data-url="${escAttr(p.watch_url)}" data-views="${p.views || 0}">Part ${p.part || 1}</button>`
+        ).join("") + "</div>";
     }
 
-    return `
-    <div class="story-card">
-      ${partTabsHtml}
-      <div class="thumb-wrap" data-video-id="${first.id}">
-        <img src="https://img.youtube.com/vi/${first.id}/0.jpg"
-          alt="${escapeAttr(storyTitle)}" loading="lazy">
+    const cls = extraClass ? ` reveal ${extraClass}` : "";
+
+    return `<div class="story-card${cls}">
+      ${tabs}
+      <div class="thumb-wrap" data-vid="${first.id}">
+        <img src="https://img.youtube.com/vi/${first.id}/0.jpg" alt="${escAttr(title)}" loading="lazy">
         <div class="play-btn"></div>
       </div>
-      <div class="info">
-        <div class="title">${escapeHtml(storyTitle)}</div>
-        <div class="meta">
-          <span>${story.date}</span>
-          ${viewsText}
-        </div>
+      <div class="card-info">
+        <div class="title">${esc(title)}</div>
+        <div class="meta"><span>${story.date}</span>${views}</div>
         <div class="tag-row">
-          <span class="subreddit-tag">${escapeHtml(story.subreddit)}</span>
-          <a href="${first.watch_url}" target="_blank" rel="noopener" class="yt-link">Watch on YouTube</a>
+          <span class="subreddit-tag">${esc(story.subreddit)}</span>
+          <a href="${first.watch_url}" target="_blank" rel="noopener" class="yt-link">Watch on YouTube &#8599;</a>
         </div>
       </div>
     </div>`;
   }
 
-  // --- Back to Top ---
+  /* --- Card interaction handlers --- */
 
-  function initBackToTop() {
-    const btn = document.getElementById("back-to-top");
-    if (!btn) return;
-
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 400) {
-        btn.classList.add("visible");
-      } else {
-        btn.classList.remove("visible");
-      }
+  function attachCardHandlers(root) {
+    // Click-to-play thumbnails
+    root.querySelectorAll(".thumb-wrap").forEach((wrap) => {
+      wrap.addEventListener("click", function () {
+        const id = this.dataset.vid;
+        const div = document.createElement("div");
+        div.className = "iframe-wrap";
+        div.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" title="Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+          allowfullscreen></iframe>`;
+        this.replaceWith(div);
+      });
     });
 
-    btn.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    // Part tab switching
+    root.querySelectorAll(".part-tabs").forEach((row) => {
+      row.addEventListener("click", (e) => {
+        const btn = e.target.closest(".part-tab");
+        if (!btn) return;
+        const card = btn.closest(".story-card");
+        const vid = btn.dataset.vid;
+        const url = btn.dataset.url;
+        const views = parseInt(btn.dataset.views, 10) || 0;
+
+        row.querySelectorAll(".part-tab").forEach((t) => t.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Swap to new thumbnail
+        const area = card.querySelector(".thumb-wrap, .iframe-wrap");
+        if (area) {
+          const thumb = document.createElement("div");
+          thumb.className = "thumb-wrap";
+          thumb.dataset.vid = vid;
+          thumb.innerHTML = `<img src="https://img.youtube.com/vi/${vid}/0.jpg" alt="Video" loading="lazy"><div class="play-btn"></div>`;
+          thumb.addEventListener("click", function () {
+            const div = document.createElement("div");
+            div.className = "iframe-wrap";
+            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1" title="Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+              allowfullscreen></iframe>`;
+            this.replaceWith(div);
+          });
+          area.replaceWith(thumb);
+        }
+
+        // Update meta
+        const metaSpans = card.querySelectorAll(".meta span");
+        if (metaSpans.length > 1) {
+          metaSpans[1].textContent = views > 0 ? fmt(views) + " views" : "";
+        }
+        const link = card.querySelector(".yt-link");
+        if (link) link.href = url;
+      });
     });
   }
 
-  // --- Fallback ---
+  /* --- Boot --- */
 
-  function showFallback() {
-    const heroVideos = document.getElementById("hero-videos");
-    if (heroVideos) heroVideos.innerHTML = "";
-
-    const statsGrid = document.getElementById("stats-grid");
-    if (statsGrid)
-      statsGrid.innerHTML =
-        '<p class="loading">Check out our videos on YouTube!</p>';
-
-    const filterTabs = document.getElementById("filter-tabs");
-    if (filterTabs) filterTabs.innerHTML = "";
-
-    const videoGrid = document.getElementById("video-grid");
-    if (videoGrid) videoGrid.innerHTML = "";
-  }
-
-  // Run when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {

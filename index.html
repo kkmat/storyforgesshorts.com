@@ -4,53 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StoryForge Shorts — Daily Reddit Stories</title>
-    <meta name="description" content="Compelling Reddit stories brought to life as short-form videos. New stories daily on YouTube, TikTok, Instagram and more.">
-    <meta property="og:title" content="StoryForge Shorts">
-    <meta property="og:description" content="Daily Reddit stories as short-form videos. AITA, TIFU, Confessions, Relationships and more.">
+    <meta name="description" content="Compelling Reddit stories brought to life as short-form videos. AITA, TIFU, Confessions, Relationships and more — new stories daily.">
+    <meta property="og:title" content="StoryForge Shorts — Daily Reddit Stories">
+    <meta property="og:description" content="Reddit stories as cinematic short-form videos. New stories daily on YouTube, TikTok, Instagram and more.">
     <meta property="og:image" content="/storyforgesshorts.com/app_icon.png">
     <meta property="og:type" content="website">
     <link rel="icon" href="/storyforgesshorts.com/app_icon.png">
     <link rel="stylesheet" href="/storyforgesshorts.com/css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="/storyforgesshorts.com/" class="brand">StoryForge Shorts</a>
-        <div class="links">
-            <a href="#videos">Videos</a>
-            <a href="#stats">Stats</a>
-            <a href="/storyforgesshorts.com/terms">Terms</a>
-            <a href="/storyforgesshorts.com/privacy">Privacy</a>
+
+    <!-- Nav -->
+    <nav class="site-nav">
+        <div class="container">
+            <a href="/storyforgesshorts.com/" class="brand">StoryForge Shorts</a>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#latest">Latest</a></li>
+                <li><a href="#gallery">Browse</a></li>
+            </ul>
         </div>
     </nav>
 
-    <div class="hero">
-        <h1>StoryForge Shorts</h1>
-        <p>Compelling Reddit stories brought to life as short-form videos. New stories daily.</p>
-        <div class="social-links">
-            <a href="https://www.youtube.com/@StoryForgeCaps" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://www.instagram.com/storyforgesshorts/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.facebook.com/profile.php?id=61574227498971" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://www.tiktok.com/@storyforgesshorts" target="_blank" rel="noopener">TikTok</a>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <span class="hero-label">Daily Reddit Stories</span>
+            <h1>Stories that<br><span class="accent">stick with you.</span></h1>
+            <p class="hero-sub">Compelling Reddit stories — AITA, Confessions, TIFU and more — brought to life as cinematic short-form videos.</p>
         </div>
-        <div id="hero-videos" class="hero-videos"></div>
-    </div>
+        <div id="hero-video" class="hero-video reveal reveal-delay-2"></div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
 
-    <div id="stats" class="section-header"><h2>Stats</h2></div>
-    <div id="stats-grid" class="stats-grid">
-        <p class="loading">Loading stats...</p>
-    </div>
+    <!-- Stats -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div id="stats-row" class="stats-row reveal">
+                <p class="loading-msg">Loading...</p>
+            </div>
+        </div>
+    </section>
 
-    <div id="videos" class="section-header"><h2>All Videos</h2></div>
-    <div id="filter-tabs" class="filter-tabs"></div>
-    <div id="video-grid" class="video-grid">
-        <p class="loading">Loading videos...</p>
-    </div>
+    <!-- How It Works -->
+    <section id="how" class="how-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">How It Works</span>
+                <h2>From Reddit to your feed</h2>
+                <p>Every story goes through our automated pipeline before it reaches you.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step reveal reveal-delay-1">
+                    <div class="step-num">01</div>
+                    <h3>Curate</h3>
+                    <p>Top stories are sourced daily from popular subreddits — AITA, Confessions, TIFU, Relationships and more.</p>
+                </div>
+                <div class="step reveal reveal-delay-2">
+                    <div class="step-num">02</div>
+                    <h3>Create</h3>
+                    <p>Each story is rewritten for narration, voiced with neural text-to-speech, and assembled into a cinematic short.</p>
+                </div>
+                <div class="step reveal reveal-delay-3">
+                    <div class="step-num">03</div>
+                    <h3>Publish</h3>
+                    <p>Videos are published across YouTube, TikTok, Instagram and Facebook — automatically, every day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Stories -->
+    <section id="latest" class="latest-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Fresh Off the Press</span>
+                <h2>Latest stories</h2>
+            </div>
+            <div id="latest-grid" class="latest-grid">
+                <p class="loading-msg">Loading latest stories...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Archive</span>
+                <h2>Browse all stories</h2>
+            </div>
+            <div id="filter-tabs" class="filter-tabs reveal"></div>
+            <div id="video-grid" class="video-grid">
+                <p class="loading-msg">Loading...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Social -->
+    <section class="cta-section">
+        <div class="container reveal">
+            <h2>Follow the stories</h2>
+            <p>New stories every day across all platforms.</p>
+            <div class="social-row">
+                <a href="https://www.youtube.com/@StoryForgeCaps" target="_blank" rel="noopener" class="social-btn">YouTube</a>
+                <a href="https://www.instagram.com/storyforgesshorts/" target="_blank" rel="noopener" class="social-btn">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61574227498971" target="_blank" rel="noopener" class="social-btn">Facebook</a>
+                <a href="https://www.tiktok.com/@storyforgesshorts" target="_blank" rel="noopener" class="social-btn">TikTok</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-copy">&copy; 2026 StoryForge Shorts</span>
+                <ul class="footer-links">
+                    <li><a href="/storyforgesshorts.com/terms">Terms</a></li>
+                    <li><a href="/storyforgesshorts.com/privacy">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">&#8593;</button>
-
-    <footer>
-        &copy; 2026 StoryForge Shorts &middot; <a href="/storyforgesshorts.com/terms">Terms</a> &middot; <a href="/storyforgesshorts.com/privacy">Privacy</a>
-    </footer>
 
     <script src="/storyforgesshorts.com/js/app.js"></script>
 </body>
