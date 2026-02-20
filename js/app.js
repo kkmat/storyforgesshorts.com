@@ -134,6 +134,7 @@
         map.set(v.story_id, {
           story_id: v.story_id,
           subreddit: v.subreddit,
+          title: v.title || "",
           date: v.date,
           parts: [],
           views: 0,
@@ -319,7 +320,9 @@
   function storyCardHTML(story, extraClass) {
     const first = story.parts[0];
     const multi = story.parts.length > 1;
-    const title = story.subreddit + " Story";
+    // Use actual video title, strip " #shorts" suffix for cleaner display
+    const rawTitle = first.title || (story.subreddit + " Story");
+    const title = rawTitle.replace(/\s*#shorts\s*$/i, "").replace(/\s*-\s*Part\s*\d+\s*$/i, "");
     const views = first.views > 0 ? `<span>${fmt(first.views)} views</span>` : "";
 
     let tabs = "";
