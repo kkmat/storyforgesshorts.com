@@ -4,9 +4,7 @@
 (function () {
   "use strict";
 
-  const BASE = location.pathname.includes("/storyforgesshorts.com")
-    ? "/storyforgesshorts.com"
-    : "";
+  const BASE = ".";
 
   let allStories = [];
   let currentFilter = "All";

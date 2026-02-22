@@ -621,6 +621,110 @@ button { font-family: var(--font); cursor: pointer; }
 .video-grid .story-card:nth-child(n+7) { animation-delay: 0.24s; }
 
 /* ============================================
+   About Section
+   ============================================ */
+.about-section {
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-inner .label {
+  display: block;
+  font-size: var(--small);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 1rem;
+}
+.about-inner h2 {
+  font-size: var(--h2);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.about-inner p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+}
+
+/* ============================================
+   Subscribe Section
+   ============================================ */
+.subscribe-section {
+  text-align: center;
+  padding: var(--section-pad) 0;
+  background: var(--bg-accent);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.subscribe-inner h2 {
+  font-size: var(--h2);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.subscribe-inner > p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+}
+.subscribe-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.subscribe-form input[type="email"] {
+  flex: 1;
+  padding: 0.85rem 1.25rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text);
+  font-size: var(--body);
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.subscribe-form input[type="email"]:focus {
+  border-color: var(--brand);
+}
+.subscribe-form input[type="email"]::placeholder {
+  color: var(--text-dim);
+}
+.subscribe-form button {
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--small);
+  letter-spacing: 0.02em;
+  transition: background 0.3s, transform 0.3s;
+  white-space: nowrap;
+}
+.subscribe-form button:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+}
+.subscribe-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+/* ============================================
    CTA / Social Section
    ============================================ */
 .cta-section {
@@ -887,4 +991,6 @@ button { font-family: var(--font); cursor: pointer; }
   .social-row { flex-direction: column; align-items: center; }
   .social-btn { width: 100%; max-width: 280px; justify-content: center; }
   .back-to-top { bottom: 1.25rem; right: 1.25rem; }
+  .subscribe-form { flex-direction: column; }
+  .subscribe-form button { width: 100%; }
 }

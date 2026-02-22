@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kkmat.github.io/storyforgesshorts.com/sitemap.xml

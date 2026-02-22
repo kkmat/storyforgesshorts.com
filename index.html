@@ -7,24 +7,49 @@
     <meta name="description" content="Compelling Reddit stories brought to life as short-form videos. AITA, TIFU, Confessions, Relationships and more — new stories daily.">
     <meta property="og:title" content="StoryForge Shorts — Daily Reddit Stories">
     <meta property="og:description" content="Reddit stories as cinematic short-form videos. New stories daily on YouTube, TikTok, Instagram and more.">
-    <meta property="og:image" content="/storyforgesshorts.com/app_icon.png">
+    <meta property="og:image" content="https://kkmat.github.io/storyforgesshorts.com/app_icon.png">
+    <meta property="og:url" content="https://kkmat.github.io/storyforgesshorts.com/">
     <meta property="og:type" content="website">
-    <link rel="icon" href="/storyforgesshorts.com/app_icon.png">
+    <meta property="og:site_name" content="StoryForge Shorts">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="StoryForge Shorts — Daily Reddit Stories">
+    <meta name="twitter:description" content="Reddit stories as cinematic short-form videos. New stories daily.">
+    <meta name="twitter:image" content="https://kkmat.github.io/storyforgesshorts.com/app_icon.png">
+    <meta name="theme-color" content="#0d0a14">
+    <link rel="canonical" href="https://kkmat.github.io/storyforgesshorts.com/">
+    <link rel="icon" href="./app_icon.png">
     <link rel="preconnect" href="https://img.youtube.com">
     <link rel="preconnect" href="https://www.youtube.com">
-    <link rel="stylesheet" href="/storyforgesshorts.com/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "StoryForge Shorts",
+      "url": "https://kkmat.github.io/storyforgesshorts.com/",
+      "description": "Compelling Reddit stories brought to life as cinematic short-form videos.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "StoryForge Shorts",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kkmat.github.io/storyforgesshorts.com/app_icon.png"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
 
     <!-- Nav -->
     <nav class="site-nav">
         <div class="container">
-            <a href="/storyforgesshorts.com/" class="brand">StoryForge Shorts</a>
+            <a href="./" class="brand">StoryForge Shorts</a>
             <button class="nav-toggle" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="#stats">Stats</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#how">How It Works</a></li>
                 <li><a href="#latest">Latest</a></li>
                 <li><a href="#gallery">Browse</a></li>
@@ -43,6 +68,17 @@
         <div class="scroll-hint">
             <span>Scroll</span>
             <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-inner reveal">
+                <span class="label">About Us</span>
+                <h2>Reddit stories, brought to life.</h2>
+                <p>StoryForge Shorts turns the most compelling stories from Reddit into cinematic short-form videos. From jaw-dropping AITA dilemmas to heartfelt confessions, we curate, narrate, and publish fresh stories every single day across YouTube, TikTok, Instagram, and Facebook.</p>
+            </div>
         </div>
     </section>
 
@@ -113,6 +149,21 @@
         </div>
     </section>
 
+    <!-- Subscribe -->
+    <section id="subscribe" class="subscribe-section">
+        <div class="container">
+            <div class="subscribe-inner reveal">
+                <h2>Never miss a story</h2>
+                <p>Get the best Reddit stories delivered to your inbox — no spam, just stories.</p>
+                <form action="https://buttondown.com/api/emails/embed-subscribe/storyforgesshorts" method="post" target="_blank" class="subscribe-form">
+                    <input type="email" name="email" placeholder="your@email.com" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p class="subscribe-note">Free newsletter via Buttondown. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA / Social -->
     <section class="cta-section">
         <div class="container reveal">
@@ -136,8 +187,8 @@
             <div class="footer-inner">
                 <span class="footer-copy">&copy; 2026 StoryForge Shorts</span>
                 <ul class="footer-links">
-                    <li><a href="/storyforgesshorts.com/terms">Terms</a></li>
-                    <li><a href="/storyforgesshorts.com/privacy">Privacy</a></li>
+                    <li><a href="./terms">Terms</a></li>
+                    <li><a href="./privacy">Privacy</a></li>
                 </ul>
             </div>
             <p class="affiliate-disclosure">As an Amazon Associate, we earn from qualifying purchases.</p>
@@ -146,6 +197,6 @@
 
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">&#8593;</button>
 
-    <script src="/storyforgesshorts.com/js/app.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
