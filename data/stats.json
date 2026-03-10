@@ -1,7 +1,7 @@
 {
   "total_videos": 92,
   "total_stories": 41,
-  "total_views": 51,
+  "total_views": 0,
   "total_likes": 0,
   "total_subreddits": 9,
   "subreddits": [
@@ -15,5 +15,5 @@
     "TIFU",
     "True Off My Chest"
   ],
-  "last_updated": "2026-03-10T05:35:59.717676+00:00"
+  "last_updated": "2026-03-10T09:00:04.082419+00:00"
 }
