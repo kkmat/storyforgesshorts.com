@@ -1,11 +1,12 @@
 {
-  "total_videos": 92,
-  "total_stories": 41,
-  "total_views": 51,
+  "total_videos": 95,
+  "total_stories": 42,
+  "total_views": 52,
   "total_likes": 0,
-  "total_subreddits": 9,
+  "total_subreddits": 10,
   "subreddits": [
     "AITA",
+    "BestofRedditorUpdates",
     "Confessions",
     "Malicious Compliance",
     "Off My Chest",
@@ -15,5 +16,5 @@
     "TIFU",
     "True Off My Chest"
   ],
-  "last_updated": "2026-03-10T16:00:03.601793+00:00"
+  "last_updated": "2026-03-11T05:25:05.898421+00:00"
 }
