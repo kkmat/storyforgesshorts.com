@@ -14,7 +14,7 @@
     "platforms": {
       "YT": "ok",
       "TT": "fail",
-      "IG": "fail",
+      "IG": "ok",
       "FB": "ok"
     }
   },
@@ -28,6 +28,25 @@
     "story_id": "entitledparents_20260310_060115",
     "embed_url": "https://www.youtube.com/embed/R_t3KEriaKE",
     "watch_url": "https://youtube.com/shorts/R_t3KEriaKE",
+    "views": 0,
+    "likes": 0,
+    "platforms": {
+      "YT": "ok",
+      "TT": "fail",
+      "IG": "ok",
+      "FB": "ok"
+    }
+  },
+  {
+    "id": "0H8r8ks4Yqw",
+    "title": "entitledparents Story - Part 3",
+    "subreddit": "entitledparents",
+    "raw_subreddit": "entitledparents",
+    "date": "2026-03-10",
+    "part": 3,
+    "story_id": "entitledparents_20260310_060115",
+    "embed_url": "https://www.youtube.com/embed/0H8r8ks4Yqw",
+    "watch_url": "https://youtube.com/shorts/0H8r8ks4Yqw",
     "views": 0,
     "likes": 0,
     "platforms": {
@@ -147,7 +166,7 @@
     "platforms": {
       "YT": "ok",
       "TT": "fail",
-      "IG": "fail",
+      "IG": "ok",
       "FB": "ok"
     }
   },
@@ -247,6 +266,25 @@
     }
   },
   {
+    "id": "-2wz1zm1C-c",
+    "title": "Blocking Me Was The Worst Mistake Of Her Life - Part 1",
+    "subreddit": "Petty Revenge",
+    "raw_subreddit": "pettyrevenge",
+    "date": "2026-03-08",
+    "part": 1,
+    "story_id": "pettyrevenge_20260308_060120",
+    "embed_url": "https://www.youtube.com/embed/-2wz1zm1C-c",
+    "watch_url": "https://youtube.com/shorts/-2wz1zm1C-c",
+    "views": 0,
+    "likes": 0,
+    "platforms": {
+      "YT": "ok",
+      "TT": "fail",
+      "IG": "fail",
+      "FB": "ok"
+    }
+  },
+  {
     "id": "EpwWC9n3kJI",
     "title": "I Taught The Concert Aisle Hog A Lesson - Part 1",
     "subreddit": "Petty Revenge",
@@ -275,6 +313,25 @@
     "story_id": "pettyrevenge_20260308_060051",
     "embed_url": "https://www.youtube.com/embed/hH0AFpt_TBE",
     "watch_url": "https://youtube.com/shorts/hH0AFpt_TBE",
+    "views": 0,
+    "likes": 0,
+    "platforms": {
+      "YT": "ok",
+      "TT": "fail",
+      "IG": "fail",
+      "FB": "ok"
+    }
+  },
+  {
+    "id": "J7tPd2Pc9ww",
+    "title": "Petty Revenge Story - Part 3",
+    "subreddit": "Petty Revenge",
+    "raw_subreddit": "pettyrevenge",
+    "date": "2026-03-08",
+    "part": 3,
+    "story_id": "pettyrevenge_20260308_060051",
+    "embed_url": "https://www.youtube.com/embed/J7tPd2Pc9ww",
+    "watch_url": "https://youtube.com/shorts/J7tPd2Pc9ww",
     "views": 0,
     "likes": 0,
     "platforms": {
