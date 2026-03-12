@@ -51,8 +51,8 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
-      "IG": "fail",
+      "TT": "ok",
+      "IG": "ok",
       "FB": "ok"
     }
   },
@@ -279,6 +279,44 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
+      "TT": "ok",
+      "IG": "fail",
+      "FB": "ok"
+    }
+  },
+  {
+    "id": "T2EU8IOcJk8",
+    "title": "Petty Revenge Story - Part 2",
+    "subreddit": "Petty Revenge",
+    "raw_subreddit": "pettyrevenge",
+    "date": "2026-03-08",
+    "part": 2,
+    "story_id": "pettyrevenge_20260308_060120",
+    "embed_url": "https://www.youtube.com/embed/T2EU8IOcJk8",
+    "watch_url": "https://youtube.com/shorts/T2EU8IOcJk8",
+    "views": 0,
+    "likes": 0,
+    "platforms": {
+      "YT": "ok",
+      "TT": "fail",
+      "IG": "fail",
+      "FB": "ok"
+    }
+  },
+  {
+    "id": "0Gm3eLt1cpI",
+    "title": "Petty Revenge Story - Part 3",
+    "subreddit": "Petty Revenge",
+    "raw_subreddit": "pettyrevenge",
+    "date": "2026-03-08",
+    "part": 3,
+    "story_id": "pettyrevenge_20260308_060120",
+    "embed_url": "https://www.youtube.com/embed/0Gm3eLt1cpI",
+    "watch_url": "https://youtube.com/shorts/0Gm3eLt1cpI",
+    "views": 0,
+    "likes": 0,
+    "platforms": {
+      "YT": "ok",
       "TT": "fail",
       "IG": "fail",
       "FB": "ok"
@@ -336,7 +374,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
