@@ -4,38 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - StoryForge Shorts</title>
+    <meta name="description" content="Terms of Service for StoryForge Shorts — daily Reddit stories brought to life as short-form videos.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Terms of Service - StoryForge Shorts">
+    <meta property="og:description" content="Terms of Service for StoryForge Shorts — daily Reddit stories brought to life as short-form videos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kkmat.github.io/storyforgesshorts.com/tos.html">
+    <meta property="og:image" content="https://kkmat.github.io/storyforgesshorts.com/assets/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Terms of Service - StoryForge Shorts">
+    <meta name="twitter:description" content="Terms of Service for StoryForge Shorts — daily Reddit stories brought to life as short-form videos.">
+    <meta name="twitter:image" content="https://kkmat.github.io/storyforgesshorts.com/assets/og-image.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://kkmat.github.io/storyforgesshorts.com/tos.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🔥</text></svg>">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./css/style.css">
+
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 20px; background: #1a1a2e; color: #eee; }
-        h1, h2 { color: #FF6B35; }
-        a { color: #FF6B35; }
+        /* Legal page specific styles */
+        .legal-page {
+            padding-top: 80px;
+        }
+
+        .legal-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Sidebar */
+        .legal-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .legal-sidebar h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .toc {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            border-radius: 0 4px 4px 0;
+            transition: all 0.25s ease;
+        }
+
+        .toc-link:hover {
+            color: #FF6B35;
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .toc-link.active {
+            color: #FF6B35;
+            border-left-color: #FF6B35;
+            background: rgba(255, 107, 53, 0.08);
+            font-weight: 500;
+        }
+
+        /* Main content */
+        .legal-content {
+            min-width: 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            transition: color 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: #FF6B35;
+        }
+
+        .last-updated-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            color: #FF6B35;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .legal-content > h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sections */
+        .legal-section {
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.25s ease;
+        }
+
+        .legal-section:hover {
+            border-color: rgba(255, 107, 53, 0.15);
+        }
+
+        .legal-section h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .legal-section h2:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .legal-section h2 .chevron-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .legal-section.collapsed h2 .chevron-icon {
+            transform: rotate(-90deg);
+        }
+
+        .legal-section .section-body {
+            padding: 0 1.5rem 1.25rem;
+        }
+
+        .legal-section.collapsed .section-body {
+            display: none;
+        }
+
+        .legal-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .legal-layout {
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 1rem;
+            }
+
+            .legal-sidebar {
+                position: relative;
+                top: 0;
+                max-height: none;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 12px;
+                padding: 1.25rem;
+                margin-bottom: 2rem;
+            }
+
+            .legal-content > h1 {
+                font-size: 1.8rem;
+            }
+
+            .legal-section h2 {
+                font-size: 1.05rem;
+                padding: 1rem 1.25rem;
+            }
+
+            .legal-section .section-body {
+                padding: 0 1.25rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Terms of Service</h1>
-    <p><em>Last updated: February 8, 2026</em></p>
 
-    <h2>1. Acceptance of Terms</h2>
-    <p>By using StoryForge Shorts ("the Service"), you agree to these Terms of Service. If you do not agree, do not use the Service.</p>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="./index.html" class="nav-logo">StoryForge Shorts</a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./index.html#videos">Videos</a>
+            <a href="./index.html#subscribe">Subscribe</a>
+        </div>
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
 
-    <h2>2. Description of Service</h2>
-    <p>StoryForge Shorts is an automated content publishing platform that creates and distributes video content across social media platforms including YouTube, TikTok, Instagram, and Facebook.</p>
+    <!-- ===== LEGAL PAGE ===== -->
+    <main class="legal-page">
+        <div class="legal-layout">
 
-    <h2>3. User Conduct</h2>
-    <p>You agree not to misuse the Service or help anyone else do so. You must comply with all applicable laws and platform-specific terms of service.</p>
+            <!-- Sidebar -->
+            <aside class="legal-sidebar">
+                <h3>Table of Contents</h3>
+                <nav class="toc">
+                    <a href="#section-1" class="toc-link">1. Acceptance of Terms</a>
+                    <a href="#section-2" class="toc-link">2. Description of Service</a>
+                    <a href="#section-3" class="toc-link">3. User Conduct</a>
+                    <a href="#section-4" class="toc-link">4. Intellectual Property</a>
+                    <a href="#section-5" class="toc-link">5. Disclaimer of Warranties</a>
+                    <a href="#section-6" class="toc-link">6. Limitation of Liability</a>
+                    <a href="#section-7" class="toc-link">7. Changes to Terms</a>
+                    <a href="#section-8" class="toc-link">8. Contact</a>
+                </nav>
+            </aside>
 
-    <h2>4. Intellectual Property</h2>
-    <p>Content published through StoryForge Shorts is sourced from publicly available Reddit posts. All trademarks and brand names belong to their respective owners.</p>
+            <!-- Main Content -->
+            <div class="legal-content">
+                <span class="last-updated-badge">Last updated: February 8, 2026</span>
+                <a href="./index.html" class="back-link">&larr; Back to Home</a>
+                <h1>Terms of Service</h1>
 
-    <h2>5. Disclaimer of Warranties</h2>
-    <p>The Service is provided "as is" without warranties of any kind, either express or implied.</p>
+                <section id="section-1" class="legal-section collapsible">
+                    <h2>
+                        1. Acceptance of Terms
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>By using StoryForge Shorts ("the Service"), you agree to these Terms of Service. If you do not agree, do not use the Service.</p>
+                    </div>
+                </section>
 
-    <h2>6. Limitation of Liability</h2>
-    <p>StoryForge Shorts shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.</p>
+                <section id="section-2" class="legal-section collapsible">
+                    <h2>
+                        2. Description of Service
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>StoryForge Shorts is an automated content publishing platform that creates and distributes video content across social media platforms including YouTube, TikTok, Instagram, and Facebook.</p>
+                    </div>
+                </section>
 
-    <h2>7. Changes to Terms</h2>
-    <p>We reserve the right to modify these terms at any time. Continued use of the Service constitutes acceptance of updated terms.</p>
+                <section id="section-3" class="legal-section collapsible">
+                    <h2>
+                        3. User Conduct
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>You agree not to misuse the Service or help anyone else do so. You must comply with all applicable laws and platform-specific terms of service.</p>
+                    </div>
+                </section>
 
-    <h2>8. Contact</h2>
-    <p>For questions about these Terms, visit <a href="/">storyforgesshorts.com</a>.</p>
+                <section id="section-4" class="legal-section collapsible">
+                    <h2>
+                        4. Intellectual Property
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>Content published through StoryForge Shorts is sourced from publicly available Reddit posts. All trademarks and brand names belong to their respective owners.</p>
+                    </div>
+                </section>
+
+                <section id="section-5" class="legal-section collapsible">
+                    <h2>
+                        5. Disclaimer of Warranties
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>The Service is provided "as is" without warranties of any kind, either express or implied.</p>
+                    </div>
+                </section>
+
+                <section id="section-6" class="legal-section collapsible">
+                    <h2>
+                        6. Limitation of Liability
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>StoryForge Shorts shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.</p>
+                    </div>
+                </section>
+
+                <section id="section-7" class="legal-section collapsible">
+                    <h2>
+                        7. Changes to Terms
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>We reserve the right to modify these terms at any time. Continued use of the Service constitutes acceptance of updated terms.</p>
+                    </div>
+                </section>
+
+                <section id="section-8" class="legal-section collapsible">
+                    <h2>
+                        8. Contact
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </h2>
+                    <div class="section-body">
+                        <p>For questions about these Terms, visit <a href="./index.html">storyforgesshorts.com</a>.</p>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <span class="footer-logo">StoryForge Shorts</span>
+            <div class="footer-links">
+                <a href="./privacy.html">Privacy Policy</a>
+                <a href="./tos.html">Terms of Service</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 StoryForge Shorts</p>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="./js/main.js" defer></script>
+
+    <script>
+        (function() {
+            // Collapsible section toggle
+            document.querySelectorAll('.legal-section.collapsible h2').forEach(function(header) {
+                header.addEventListener('click', function() {
+                    this.closest('.legal-section').classList.toggle('collapsed');
+                });
+            });
+
+            // Smooth scroll for TOC links
+            document.querySelectorAll('.toc-link').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        var offset = 100;
+                        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Scroll-spy: highlight active TOC link
+            var sections = document.querySelectorAll('.legal-section');
+            var tocLinks = document.querySelectorAll('.toc-link');
+
+            function updateActiveToc() {
+                var scrollPos = window.scrollY + 120;
+                var activeIndex = 0;
+
+                sections.forEach(function(section, i) {
+                    if (section.offsetTop <= scrollPos) {
+                        activeIndex = i;
+                    }
+                });
+
+                tocLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                if (tocLinks[activeIndex]) {
+                    tocLinks[activeIndex].classList.add('active');
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveToc, { passive: true });
+            updateActiveToc();
+        })();
+    </script>
+
 </body>
 </html>
