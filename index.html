@@ -3,18 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StoryForge Shorts</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 20px; background: #1a1a2e; color: #eee; }
-        h1 { color: #FF6B35; }
-        a { color: #FF6B35; }
-        .tagline { color: #aaa; font-size: 1.2em; }
-    </style>
+    <title>StoryForge Shorts | Daily Reddit Stories on YouTube</title>
+    <meta name="description" content="StoryForge Shorts brings the best Reddit stories to life with daily short-form videos. AITA, TIFU, confessions, revenge stories and more — watch on YouTube, TikTok, Instagram and Facebook.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="StoryForge Shorts | Daily Reddit Stories on YouTube">
+    <meta property="og:description" content="Daily Reddit stories brought to life. AITA, TIFU, confessions, revenge and more — subscribe for new videos every day.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kkmat.github.io/storyforgesshorts.com/">
+    <meta property="og:image" content="https://kkmat.github.io/storyforgesshorts.com/assets/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StoryForge Shorts | Daily Reddit Stories on YouTube">
+    <meta name="twitter:description" content="Daily Reddit stories brought to life. AITA, TIFU, confessions, revenge and more.">
+    <meta name="twitter:image" content="https://kkmat.github.io/storyforgesshorts.com/assets/og-image.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://kkmat.github.io/storyforgesshorts.com/">
+
+    <!-- Favicon (orange flame data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🔥</text></svg>">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "StoryForge Shorts",
+        "url": "https://kkmat.github.io/storyforgesshorts.com/",
+        "description": "Daily Reddit stories brought to life as short-form videos on YouTube, TikTok, Instagram and Facebook.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "StoryForge Shorts",
+            "url": "https://kkmat.github.io/storyforgesshorts.com/"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.youtube.com/@storyforgecaps/search?query={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "StoryForge Shorts — Daily Reddit Stories",
+        "description": "Short-form videos bringing the best Reddit stories to life. AITA, TIFU, confessions, revenge and more.",
+        "thumbnailUrl": "https://kkmat.github.io/storyforgesshorts.com/assets/og-image.png",
+        "uploadDate": "2026-01-01",
+        "publisher": {
+            "@type": "Organization",
+            "name": "StoryForge Shorts",
+            "url": "https://www.youtube.com/@storyforgecaps"
+        }
+    }
+    </script>
 </head>
 <body>
-    <h1>StoryForge Shorts</h1>
-    <p class="tagline">Daily Reddit stories brought to life. Subscribe for AITA, TIFU, confessions & more.</p>
-    <p>New parts every day across YouTube, TikTok, Instagram & Facebook.</p>
-    <p><a href="/tos">Terms of Service</a> | <a href="/privacy">Privacy Policy</a></p>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">StoryForge Shorts</a>
+        <div class="nav-links">
+            <a href="#videos">Videos</a>
+            <a href="#stats">Stats</a>
+            <a href="#subscribe">Subscribe</a>
+            <a href="#social">About</a>
+        </div>
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="hero">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">
+                StoryForge<br>
+                <span class="text-gradient">Shorts</span>
+            </h1>
+            <p class="hero-tagline">
+                Daily Reddit stories: <span class="typing-text"></span><span class="typing-cursor">|</span>
+            </p>
+            <div class="hero-cta">
+                <a href="https://www.youtube.com/@storyforgecaps" class="btn-primary" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Watch on YouTube
+                </a>
+                <a href="#subscribe" class="btn-outline">Subscribe</a>
+            </div>
+            <div class="platform-icons">
+                <a href="https://www.youtube.com/@storyforgecaps" target="_blank" rel="noopener" aria-label="YouTube">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@storyforgesshorts" target="_blank" rel="noopener" aria-label="TikTok">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.28 8.28 0 0 0 4.84 1.55V6.85a4.84 4.84 0 0 1-1.08-.16z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/storyforgesshorts" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.facebook.com/storyforgesshorts" target="_blank" rel="noopener" aria-label="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <a href="#stats" class="scroll-indicator" aria-label="Scroll down">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </a>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section id="stats" class="stats-section">
+        <div class="section-header">
+            <h2>By The Numbers</h2>
+            <p>Our growing community in real time</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card glass reveal">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                <span class="stat-number" data-target="total_videos">0</span>
+                <span class="stat-label">Videos Published</span>
+            </div>
+            <div class="stat-card glass reveal">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span class="stat-number" data-target="total_views">0</span>
+                <span class="stat-label">Total Views</span>
+            </div>
+            <div class="stat-card glass reveal">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span class="stat-number" data-target="total_likes">0</span>
+                <span class="stat-label">Likes</span>
+            </div>
+            <div class="stat-card glass reveal">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span class="stat-number" data-target="total_subreddits">0</span>
+                <span class="stat-label">Subreddits Covered</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED ===== -->
+    <section id="featured" class="featured-section">
+        <div class="section-header reveal">
+            <h2>Latest Story</h2>
+        </div>
+        <div id="featured-player" class="reveal"></div>
+        <div id="featured-info" class="reveal"></div>
+        <div id="story-carousel" class="reveal"></div>
+    </section>
+
+    <!-- ===== VIDEO GALLERY ===== -->
+    <section id="videos" class="gallery-section">
+        <div class="section-header reveal">
+            <h2>All Videos</h2>
+            <p>Browse our complete collection</p>
+        </div>
+        <div class="gallery-controls reveal">
+            <div class="search-bar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="search-input" placeholder="Search videos..." aria-label="Search videos">
+            </div>
+            <div id="filter-pills"></div>
+        </div>
+        <div id="video-grid" class="video-grid reveal"></div>
+        <button id="load-more-btn" class="btn-primary" style="display:none;">Load More</button>
+    </section>
+
+    <!-- ===== SUBSCRIBE ===== -->
+    <section id="subscribe" class="subscribe-section">
+        <div class="subscribe-card glass reveal">
+            <h2>Never Miss a Story</h2>
+            <p>Get notified when we drop new videos</p>
+            <form id="subscribe-form">
+                <input type="email" placeholder="Enter your email" required aria-label="Email address">
+                <button type="submit" class="btn-primary">
+                    Subscribe
+                    <span class="loading-spinner"></span>
+                </button>
+            </form>
+            <p class="subscribe-note">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ===== SOCIAL ===== -->
+    <section id="social" class="social-section">
+        <div class="section-header reveal">
+            <h2>Follow Us</h2>
+        </div>
+        <div class="social-grid">
+            <div class="social-card youtube reveal">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <h3>YouTube</h3>
+                <p>Watch our videos</p>
+                <a href="https://www.youtube.com/@storyforgecaps" class="btn-outline" target="_blank" rel="noopener">Subscribe</a>
+            </div>
+            <div class="social-card tiktok reveal">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.28 8.28 0 0 0 4.84 1.55V6.85a4.84 4.84 0 0 1-1.08-.16z"/></svg>
+                <h3>TikTok</h3>
+                <p>Short-form stories</p>
+                <a href="https://www.tiktok.com/@storyforgesshorts" class="btn-outline" target="_blank" rel="noopener">Follow</a>
+            </div>
+            <div class="social-card instagram reveal">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <h3>Instagram</h3>
+                <p>Behind the scenes</p>
+                <a href="https://www.instagram.com/storyforgesshorts" class="btn-outline" target="_blank" rel="noopener">Follow</a>
+            </div>
+            <div class="social-card facebook reveal">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <h3>Facebook</h3>
+                <p>Join our community</p>
+                <a href="https://www.facebook.com/storyforgesshorts" class="btn-outline" target="_blank" rel="noopener">Follow</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AFFILIATE ===== -->
+    <section class="affiliate-section">
+        <h3>Support Us</h3>
+        <p>Check out our picks on <a href="https://www.amazon.com/?tag=storyforgesho-20" target="_blank" rel="noopener">Amazon</a></p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <span class="footer-logo">StoryForge Shorts</span>
+            <div class="footer-links">
+                <a href="./privacy.html">Privacy Policy</a>
+                <a href="./tos.html">Terms of Service</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 StoryForge Shorts</p>
+        </div>
+    </footer>
+
+    <!-- ===== VIDEO MODAL ===== -->
+    <div id="video-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div id="modal-embed" class="modal-embed"></div>
+            <div id="modal-info" class="modal-info"></div>
+            <div id="modal-parts" class="modal-parts"></div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="./js/main.js" defer></script>
+
 </body>
 </html>
