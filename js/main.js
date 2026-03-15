@@ -555,7 +555,7 @@
       embedEl.innerHTML =
         '<iframe src="' + video.embed_url + '" ' +
         'allow="encrypted-media" allowfullscreen ' +
-        'frameborder="0" style="width:100%;aspect-ratio:9/16;max-height:70vh;border-radius:12px;"></iframe>';
+        'frameborder="0"></iframe>';
     }
 
     var titleEl = container.querySelector('.featured-title');
@@ -820,21 +820,6 @@
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
     gsap.registerPlugin(ScrollTrigger);
-
-    // Section reveals
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      });
-    });
 
     // Parallax on hero orbs
     document.querySelectorAll('.hero-orb, .orb').forEach(function (orb, i) {
