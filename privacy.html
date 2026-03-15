@@ -35,17 +35,19 @@
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar scrolled">
-        <a href="./index.html" class="nav-logo">StoryForge Shorts</a>
-        <div class="nav-links">
-            <a href="./index.html">Home</a>
-            <a href="./index.html#videos">Videos</a>
-            <a href="./index.html#subscribe">Subscribe</a>
+        <div class="container">
+            <a href="./index.html" class="nav-logo">StoryForge Shorts</a>
+            <div class="nav-links">
+                <a href="./index.html">Home</a>
+                <a href="./index.html#videos">Videos</a>
+                <a href="./index.html#subscribe">Subscribe</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <button class="hamburger" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
     </nav>
 
     <!-- ===== LEGAL LAYOUT ===== -->
@@ -171,14 +173,14 @@
     </div>
 
     <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="footer-content">
-            <span class="footer-logo">StoryForge Shorts</span>
-            <div class="footer-links">
+    <footer class="footer">
+        <div class="container">
+            <span class="footer__copy">StoryForge Shorts</span>
+            <div class="footer__links">
                 <a href="./privacy.html">Privacy Policy</a>
                 <a href="./tos.html">Terms of Service</a>
             </div>
-            <p class="footer-copy">&copy; 2026 StoryForge Shorts</p>
+            <p class="footer__copy">&copy; 2026 StoryForge Shorts</p>
         </div>
     </footer>
 
@@ -257,19 +259,19 @@
             });
         });
 
-        // ── Mobile hamburger toggle (matches main.js pattern) ──
-        var hamburger = document.querySelector('.hamburger');
+        // ── Mobile nav toggle ──
+        var navToggle = document.querySelector('.nav-toggle');
         var navLinks = document.querySelector('.nav-links');
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', function () {
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', function () {
                 navLinks.classList.toggle('open');
-                hamburger.classList.toggle('active');
+                navToggle.classList.toggle('active');
             });
 
             navLinks.querySelectorAll('a').forEach(function (link) {
                 link.addEventListener('click', function () {
                     navLinks.classList.remove('open');
-                    hamburger.classList.remove('active');
+                    navToggle.classList.remove('active');
                 });
             });
         }

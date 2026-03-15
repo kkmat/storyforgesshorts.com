@@ -113,6 +113,24 @@ button {
 
 
 /* ============================================================
+   Section Headers
+   ============================================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  margin-bottom: 0.75rem;
+}
+
+.section-header p {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+
+/* ============================================================
    Typography
    ============================================================ */
 h1, h2, h3, h4, h5, h6 {
@@ -1274,6 +1292,116 @@ section {
 
 .callback-card.error h2 {
   color: #ef4444;
+}
+
+
+/* ============================================================
+   Video Modal (dynamically created by JS)
+   ============================================================ */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal.open {
+  display: flex;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.video-modal-content {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: color var(--duration) var(--ease);
+}
+
+.video-modal-close:hover {
+  color: var(--text);
+}
+
+.video-modal-embed {
+  margin-bottom: 1.5rem;
+}
+
+.video-modal-info h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.video-modal-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.video-modal-parts {
+  margin-top: 1rem;
+}
+
+.modal-parts-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.modal-parts-list {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-part-btn {
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.modal-part-btn:hover,
+.modal-part-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
 }
 
 

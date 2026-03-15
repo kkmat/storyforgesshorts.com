@@ -355,29 +355,29 @@
     var totalParts = getTotalParts(video.story_id);
     var partLabel = '';
     if (totalParts > 1 && video.part) {
-      partLabel = '<span class="part-indicator">Part ' + video.part + ' of ' + totalParts + '</span>';
+      partLabel = '<span class="badge badge-part">Part ' + video.part + '/' + totalParts + '</span>';
     }
 
-    var newBadge = isNew(video.date) ? '<span class="new-badge">NEW</span>' : '';
+    var newBadge = isNew(video.date) ? '<span class="badge badge-new">NEW</span>' : '';
 
     var thumbUrl = 'https://img.youtube.com/vi/' + video.id + '/mqdefault.jpg';
 
     return '<div class="video-card" data-video-id="' + escapeHtml(video.id) + '">' +
-      '<div class="video-card-thumb">' +
+      '<div class="video-card__thumb">' +
         '<img src="' + thumbUrl + '" alt="' + escapeHtml(video.title) + '" loading="lazy"' +
         ' onerror="this.src=\'https://img.youtube.com/vi/' + video.id + '/hqdefault.jpg\'">' +
-        '<div class="video-card-overlay"><svg viewBox="0 0 24 24" width="48" height="48" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>' +
+        '<div class="video-card__play"><svg viewBox="0 0 24 24" width="24" height="24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>' +
+        '<span class="badge badge-subreddit">' + escapeHtml(video.subreddit || '') + '</span>' +
         newBadge +
-      '</div>' +
-      '<div class="video-card-body">' +
-        '<span class="subreddit-badge">' + escapeHtml(video.subreddit || '') + '</span>' +
-        '<h3 class="video-card-title">' + escapeHtml(video.title || '') + '</h3>' +
-        '<div class="video-card-meta">' +
-          '<span class="video-views">' + formatNumber(video.views) + ' views</span>' +
-          '<span class="video-likes">' + formatNumber(video.likes) + ' likes</span>' +
-          '<span class="video-date">' + relativeDate(video.date) + '</span>' +
-        '</div>' +
         partLabel +
+      '</div>' +
+      '<div class="video-card__info">' +
+        '<h3 class="video-card__title">' + escapeHtml(video.title || '') + '</h3>' +
+        '<div class="video-card__meta">' +
+          '<span>' + formatNumber(video.views) + ' views</span>' +
+          '<span>' + formatNumber(video.likes) + ' likes</span>' +
+          '<span>' + relativeDate(video.date) + '</span>' +
+        '</div>' +
       '</div>' +
     '</div>';
   }
@@ -688,28 +688,26 @@
   // ───────────────────────────────────────────────
 
   function initMobileNav() {
-    var toggle = document.querySelector('.hamburger, .nav-toggle, #nav-toggle');
-    var mobileNav = document.querySelector('.mobile-nav, #mobile-nav');
-    if (!toggle) return;
+    var toggle = document.querySelector('.nav-toggle');
+    var navLinks = document.querySelector('.nav-links');
+    if (!toggle || !navLinks) return;
 
     toggle.addEventListener('click', function () {
-      var isOpen = document.body.classList.toggle('nav-open');
-      if (mobileNav) mobileNav.classList.toggle('open');
+      var isOpen = navLinks.classList.toggle('open');
       toggle.classList.toggle('active');
-      toggle.setAttribute('aria-expanded', isOpen);
+      document.body.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
     // Close on link click
-    if (mobileNav) {
-      mobileNav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          mobileNav.classList.remove('open');
-          document.body.classList.remove('nav-open');
-          if (toggle) toggle.classList.remove('active');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        document.body.classList.remove('nav-open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
       });
-    }
+    });
   }
 
   // ───────────────────────────────────────────────
