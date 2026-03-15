@@ -4,42 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikTok Authorization - StoryForge Shorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 20px; background: #1a1a2e; color: #eee; text-align: center; }
-        h1 { color: #FF6B35; }
-        .code-box { background: #2D1B69; padding: 20px; border-radius: 10px; margin: 20px 0; font-family: monospace; font-size: 1.2em; word-break: break-all; user-select: all; cursor: pointer; }
-        .error { color: #ff4444; }
-        .success { color: #44ff44; }
-        button { background: #FF6B35; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1em; cursor: pointer; margin-top: 10px; }
-        button:hover { background: #e55a2b; }
+        /* Checkmark draw animation */
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: checkmark-circle 0.6s ease-in-out forwards;
+        }
+        .checkmark-check {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: checkmark-check 0.3s 0.4s ease-in-out forwards;
+        }
+        @keyframes checkmark-circle {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes checkmark-check {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Error X animation */
+        .error-x-line {
+            stroke-dasharray: 30;
+            stroke-dashoffset: 30;
+            animation: error-x-draw 0.3s 0.4s ease-in-out forwards;
+        }
+        .error-x-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: checkmark-circle 0.6s ease-in-out forwards;
+        }
+        @keyframes error-x-draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Copied confirmation */
+        .copied-msg {
+            color: #22c55e;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .copied-msg.show {
+            opacity: 1;
+        }
+
+        /* Code box cursor override */
+        .code-box {
+            cursor: pointer;
+            user-select: all;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .code-box:hover {
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.1);
+        }
+
+        /* Return button arrow animation */
+        .btn-outline svg {
+            transition: transform 0.3s ease;
+        }
+        .btn-outline:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* Callback footer */
+        .callback-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
     </style>
 </head>
-<body>
-    <h1>StoryForge Shorts</h1>
-    <div id="result"></div>
+<body class="callback-page">
+
+    <div class="callback-card glass" id="callback-card">
+        <h3 class="text-gradient" style="margin-bottom: 2rem; font-size: 1.3rem;">StoryForge Shorts</h3>
+        <div id="result"></div>
+    </div>
+
+    <div class="callback-footer">StoryForge Shorts</div>
+
     <script>
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
         const error = params.get('error');
         const el = document.getElementById('result');
+        const card = document.getElementById('callback-card');
 
         if (code) {
-            el.innerHTML = `
-                <p class="success">Authorization successful!</p>
-                <p>Copy this code and paste it back in your terminal:</p>
-                <div class="code-box" id="code" onclick="copyCode()">${code}</div>
-                <button onclick="copyCode()">Copy Code</button>
-                <p id="copied" style="display:none; color: #44ff44;">Copied!</p>
-            `;
+            card.classList.add('success');
+
+            const codeDiv = document.createElement('div');
+
+            // Animated checkmark SVG
+            codeDiv.innerHTML =
+                '<svg width="64" height="64" viewBox="0 0 52 52" style="display:block;margin:0 auto 1.5rem;">' +
+                    '<circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" stroke="#22c55e" stroke-width="2" />' +
+                    '<path class="checkmark-check" d="M14.1 27.2l7.1 7.2 16.7-16.8" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />' +
+                '</svg>' +
+                '<h2 style="color:#22c55e;margin-bottom:0.75rem;">Authorization Successful!</h2>' +
+                '<p style="margin-bottom:1.5rem;">Copy this code and paste it back in your terminal:</p>';
+
+            // Code box — use textContent for safety
+            const codeBox = document.createElement('div');
+            codeBox.className = 'code-box';
+            codeBox.id = 'code';
+            codeBox.textContent = code;
+            codeBox.onclick = copyCode;
+
+            // Copy button
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'btn-primary';
+            copyBtn.style.cssText = 'width:100%;justify-content:center;';
+            copyBtn.textContent = 'Copy Code';
+            copyBtn.onclick = copyCode;
+
+            // Copied message
+            const copiedMsg = document.createElement('p');
+            copiedMsg.className = 'copied-msg';
+            copiedMsg.id = 'copied';
+            copiedMsg.textContent = 'Copied!';
+
+            // Return link
+            const returnLink = document.createElement('a');
+            returnLink.href = './index.html';
+            returnLink.className = 'btn-outline';
+            returnLink.style.cssText = 'margin-top:2rem;display:inline-flex;';
+            returnLink.innerHTML =
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/>' +
+                '</svg> Return to Home';
+
+            codeDiv.appendChild(codeBox);
+            codeDiv.appendChild(copyBtn);
+            codeDiv.appendChild(copiedMsg);
+            codeDiv.appendChild(returnLink);
+            el.appendChild(codeDiv);
+
+            // Auto-copy on page load
+            try {
+                navigator.clipboard.writeText(code);
+                document.getElementById('copied').classList.add('show');
+            } catch (e) {
+                // Some browsers block clipboard on load
+            }
+
         } else if (error) {
-            el.innerHTML = `<p class="error">Authorization failed: ${error}</p><p>${params.get('error_description') || ''}</p>`;
+            card.classList.add('error');
+
+            const errorDesc = params.get('error_description') || '';
+
+            el.innerHTML =
+                '<svg width="64" height="64" viewBox="0 0 52 52" style="display:block;margin:0 auto 1.5rem;">' +
+                    '<circle class="error-x-circle" cx="26" cy="26" r="25" fill="none" stroke="#ef4444" stroke-width="2" />' +
+                    '<line class="error-x-line" x1="16" y1="16" x2="36" y2="36" stroke="#ef4444" stroke-width="3" stroke-linecap="round" />' +
+                    '<line class="error-x-line" x1="36" y1="16" x2="16" y2="36" stroke="#ef4444" stroke-width="3" stroke-linecap="round" />' +
+                '</svg>' +
+                '<h2 style="color:#ef4444;margin-bottom:0.75rem;">Authorization Failed</h2>' +
+                '<p style="margin-bottom:0.5rem;"></p>' +
+                '<p style="font-size:0.9rem;"></p>' +
+                '<a href="./index.html" class="btn-outline" style="margin-top:2rem;display:inline-flex;">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/>' +
+                    '</svg> Return to Home' +
+                '</a>';
+
+            // Set error text safely with textContent
+            const paragraphs = el.querySelectorAll('p');
+            paragraphs[0].textContent = error;
+            if (errorDesc) {
+                paragraphs[1].textContent = errorDesc;
+            }
+
         } else {
-            el.innerHTML = `<p class="error">No authorization code received.</p>`;
+            card.classList.add('error');
+
+            el.innerHTML =
+                '<svg width="64" height="64" viewBox="0 0 52 52" style="display:block;margin:0 auto 1.5rem;">' +
+                    '<circle class="error-x-circle" cx="26" cy="26" r="25" fill="none" stroke="#ef4444" stroke-width="2" />' +
+                    '<line class="error-x-line" x1="16" y1="16" x2="36" y2="36" stroke="#ef4444" stroke-width="3" stroke-linecap="round" />' +
+                    '<line class="error-x-line" x1="36" y1="16" x2="16" y2="36" stroke="#ef4444" stroke-width="3" stroke-linecap="round" />' +
+                '</svg>' +
+                '<h2 style="color:#ef4444;margin-bottom:0.75rem;">Authorization Failed</h2>' +
+                '<p>No authorization code received.</p>' +
+                '<a href="./index.html" class="btn-outline" style="margin-top:2rem;display:inline-flex;">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/>' +
+                    '</svg> Return to Home' +
+                '</a>';
         }
 
         function copyCode() {
             navigator.clipboard.writeText(document.getElementById('code').textContent);
-            document.getElementById('copied').style.display = 'block';
+            document.getElementById('copied').classList.add('show');
         }
     </script>
 </body>
