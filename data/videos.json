@@ -161,7 +161,7 @@
     "story_id": "pettyrevenge_20260311_060024",
     "embed_url": "https://www.youtube.com/embed/x-n2hhn_RiA",
     "watch_url": "https://youtube.com/shorts/x-n2hhn_RiA",
-    "views": 0,
+    "views": 1,
     "likes": 0,
     "platforms": {
       "YT": "ok",
@@ -199,7 +199,7 @@
     "story_id": "entitledparents_20260310_060115",
     "embed_url": "https://www.youtube.com/embed/R_t3KEriaKE",
     "watch_url": "https://youtube.com/shorts/R_t3KEriaKE",
-    "views": 0,
+    "views": 1,
     "likes": 0,
     "platforms": {
       "YT": "ok",
@@ -389,7 +389,7 @@
     "story_id": "MaliciousCompliance_20260309_060025",
     "embed_url": "https://www.youtube.com/embed/oAkN8s48JcI",
     "watch_url": "https://youtube.com/shorts/oAkN8s48JcI",
-    "views": 2,
+    "views": 3,
     "likes": 0,
     "platforms": {
       "YT": "ok",
@@ -792,7 +792,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
@@ -811,7 +811,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "ok",
       "FB": "ok"
     }
@@ -830,7 +830,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "ok",
       "FB": "ok"
     }
