@@ -51,7 +51,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "ok",
       "FB": "ok"
     }
@@ -545,7 +545,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "ok",
       "FB": "ok"
     }
@@ -621,7 +621,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
@@ -640,7 +640,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
@@ -659,7 +659,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
@@ -678,7 +678,7 @@
     "likes": 1,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
@@ -697,7 +697,7 @@
     "likes": 0,
     "platforms": {
       "YT": "ok",
-      "TT": "fail",
+      "TT": "ok",
       "IG": "fail",
       "FB": "ok"
     }
