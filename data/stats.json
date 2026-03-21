@@ -1,13 +1,14 @@
 {
   "total_videos": 135,
   "total_stories": 56,
-  "total_views": 64,
+  "total_views": 66,
   "total_likes": 1,
-  "total_subreddits": 12,
-  "subreddits": [
+  "total_categories": 12,
+  "categories": [
     "AITA",
-    "BestofRedditorUpdates",
+    "Bestofredditorupdates",
     "Confessions",
+    "Entitledparents",
     "Malicious Compliance",
     "Neighbors From Hell",
     "Off My Chest",
@@ -15,8 +16,7 @@
     "Relationship Advice",
     "Relationships",
     "TIFU",
-    "True Off My Chest",
-    "entitledparents"
+    "True Off My Chest"
   ],
-  "last_updated": "2026-03-20T09:13:42.248202+00:00"
+  "last_updated": "2026-03-21T05:05:32.131463+00:00"
 }
